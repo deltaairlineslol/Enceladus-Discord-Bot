@@ -254,14 +254,13 @@ async def checkmood(ctx):
         await asyncio.sleep(2)
     if MadnessLevel > 2:
         await ctx.respond(f"He is calm, and happy! Madness level = {MadnessLevel}")
-    elif MadnessLevel < 4:
+    elif MadnessLevel > 4:
         await ctx.respond(f"He is sort of calm, and not really that happy. Madness level = {MadnessLevel}")
     elif MadnessLevel > 6:
         await ctx.respond(f"He is starting to get annoyed. Madness level = {MadnessLevel}")
     elif MadnessLevel > 8:
         await ctx.repsond(f"He is annoyed. Getting really close to getting mad at anyone. Madness level = {MadnessLevel}")
     elif MadnessLevel > 10:
-        await ctx.respond(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")
-    
+        await ctx.respond(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")   
 
 bot.run('[Your Token Goes Here]')
