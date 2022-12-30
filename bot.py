@@ -249,7 +249,7 @@ async def givetea(ctx):
 @bot.slash_command()
 async def checkmood(ctx):
     global MadnessLevel
-    print("Ence's Madness Level is " + MadnessLevel + " Right now!")
+    print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
     async with ctx.typing():
         await asyncio.sleep(2)
     if MadnessLevel > 2:
