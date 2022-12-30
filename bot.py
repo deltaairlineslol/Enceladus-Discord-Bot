@@ -56,7 +56,7 @@ MadnessLevel = 0
 
 TeaVariable = [
     "..tea? sure, why not.",
-    "you want me to drink tea? okay."
+    "you want me to drink tea? okay.",
     "you want me to drink that? okay"
 ]
 
@@ -263,8 +263,5 @@ async def checkmood(ctx):
     elif MadnessLevel > 10:
         await ctx.respond(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")
     
-
-
-
 
 bot.run('[Your Token Goes Here]')
