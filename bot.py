@@ -224,7 +224,7 @@ async def bad(ctx):
         await asyncio.sleep(2)
     if MadnessLevel < 10:
         await ctx.respond("SYSTEM: You have added 1 more madness level to Enceladus. Either Feed him an oreo, ask a story, or just say hi to lower his level!", ephemeral=True)
-        await ctx.responds("Keep in mind: **This is in beta**, so these currently do nothing. I needed to push this update soon, so nothing changes here.")
+        await ctx.respond("Keep in mind: **This is in beta**, so these currently do nothing. I needed to push this update soon, so nothing changes here.")
     elif MadnessLevel >= 10:
         await ctx.respond("your gonna regret that...")
 
