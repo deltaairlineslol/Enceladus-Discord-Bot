@@ -91,7 +91,7 @@ async def on_ready():
     
 
 #Hello Command    
-@bot.slash_command()
+@bot.slash_command(description="Say hi to the boy!")
 async def hello(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -102,14 +102,14 @@ async def hello(ctx):
     
 
 #Random Command S3P Requested.
-@bot.slash_command()
+@bot.slash_command(description="Some random command S3P requested.")
 async def garkalmabdildbajbloug(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     await ctx.respond("what..?")
 
 #Ping Test command
-@bot.slash_command()
+@bot.slash_command(description="Test command, just tells you if the bot is working or not")
 async def ping(ctx):
         async with ctx.typing():
             await asyncio.sleep(2)
@@ -173,7 +173,7 @@ class SelectView(discord.ui.View):
         self.add_item(Select())
 
 #The actual command itself. Stories command.
-@bot.slash_command()
+@bot.slash_command(description="Stories!")
 async def stories(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -182,7 +182,7 @@ async def stories(ctx):
 
 
 # Feed Oreo command.
-@bot.slash_command()
+@bot.slash_command(description="Feed the boy an oreo!")
 async def feedoreo(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -191,13 +191,13 @@ async def feedoreo(ctx):
         await asyncio.sleep(2)
     await ctx.respond(random.choice(FeedOreoVariable))
 
-@bot.slash_command()
+@bot.slash_command(description="Fun facts about the bot!")
 async def funfact(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     await ctx.respond(random.choice(FunFactVariable))
 
-@bot.slash_command()
+@bot.slash_command(description="Throw away an Oreo.")
 async def throwawayoreo(ctx):
     global MadnessLevel
     async with ctx.typing():
@@ -205,7 +205,7 @@ async def throwawayoreo(ctx):
     await ctx.respond(random.choice(TrashedOreoVariable))
     MadnessLevel = MadnessLevel + 1
 
-@bot.slash_command()
+@bot.slash_command(description="Feed him a toothpaste oreo.")
 async def toothpasteoreo(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel + 1
@@ -215,7 +215,7 @@ async def toothpasteoreo(ctx):
     await ctx.respond(random.choice(ToothpasteVariable))
 
 
-@bot.slash_command()
+@bot.slash_command(description="Yell bad at him.")
 async def bad(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel + 1
@@ -223,12 +223,12 @@ async def bad(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     if MadnessLevel < 10:
-        await ctx.respond("SYSTEM: You have added 1 more madness level to Enceladus. Either Feed him an oreo, ask a story, or just say hi to lower his level!")
-        await ctx.send("Keep in mind: **This is in beta**, so these currently do nothing. I needed to push this update soon, so nothing changes here.")
+        await ctx.respond("SYSTEM: You have added 1 more madness level to Enceladus. Either Feed him an oreo, ask a story, or just say hi to lower his level!", ephemeral=True)
+        await ctx.responds("Keep in mind: **This is in beta**, so these currently do nothing. I needed to push this update soon, so nothing changes here.")
     elif MadnessLevel >= 10:
         await ctx.respond("your gonna regret that...")
 
-@bot.slash_command()
+@bot.slash_command(description="Calm him.")
 async def calm(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -236,7 +236,8 @@ async def calm(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     await ctx.respond("Thanks.")
-@bot.slash_command()
+
+@bot.slash_command(description="Give the boy tea!")
 async def givetea(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -246,7 +247,7 @@ async def givetea(ctx):
     await ctx.respond(random.choice(TeaVariable))
 
 
-@bot.slash_command()
+@bot.slash_command(description="Check his mood, sometimes the people in the public server can make him angry...")
 async def checkmood(ctx):
     global MadnessLevel
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
@@ -264,6 +265,30 @@ async def checkmood(ctx):
         await ctx.repsond(f"He is annoyed. Getting really close to getting mad at anyone. Madness level = {MadnessLevel}")
     elif MadnessLevel > 10:
         await ctx.respond(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")
+
+@bot.slash_command(description = "Send Feedback to the dev!")
+async def feedback(ctx, feedback):
+    await ctx.respond("Feedback sent! I hope to read your idea and add it!")
+    await ctx.respond("Debug Info ahead, If found in public bot, please notify EpDelta#3783 ASAP.", ephemeral=True)
+    await asyncio.sleep(2)
+    await ctx.respond("Your Feedback Sent was:" + feedback, ephemeral=True)
+    print("Someone sent feedback! The feedback is: " + feedback)
+
+@bot.slash_command(description = "A Quick Note from the dev. ||Temp Command ||")
+async def note(ctx):
+    await ctx.respond("Hello, I've already announced this in the public server, but I will be taking a break. I worked on this bot during my break because I had nothing to do, and now that school is back up and I have midterms coming up, I don't really have time to work on EnceBot. I also want to hang out with my IRL Friends more, so I will halt development until further noted. However, when I come back, I'm gonna try to learn how to use a Database, and if all goes well, our next update might include an inventory system! Also, I'm happy you guys have put in suggestions to me, and when you put in feedback with `/feedback`, I will end up logging onto my pi (The thing hosting this bot), and write down things for suggestions. However, Like I said before, All development is halted for now. It's not only because im lazy and want to hang out with IRL Friends, but because i have midterms. It's been fun working on this bot tho, and I can't wait to get back to it when I can! - Delta.", ephemeral=True)
+
+@bot.slash_command(description = "View the Latest Update!")
+async def updatelog(ctx):
+    await ctx.respond("""Latest Update log:
+    
+**EnceBot Update V1.0.2**
+*The Last update for a while.*
+
+• Added new commands, `/note`, `/feedback`, and `/updatelog`
+• Added Descriptions to the commands.
+
+Like the title of the update says, this will be the last update for a while. I have Midterms coming up, and I don't really want to develop the bot and do midterms at the same time, so this will be the last update for a while.""", ephemeral=True)
    
 
 bot.run('[Your Token Goes Here]')
