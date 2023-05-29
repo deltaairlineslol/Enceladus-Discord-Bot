@@ -387,5 +387,8 @@ async def syncmadnesslevel(torf):
         myquery = { "AngerLevel": MadnessLevel + 1}
         newvalues = { "$set": { "AngerLevel": MadnessLevel }}
         mycol.update_one(myquery, newvalues)
+   
+
+
 
 bot.run('[Your Bot Token Here]')
