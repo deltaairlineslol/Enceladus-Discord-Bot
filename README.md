@@ -11,3 +11,4 @@ If you want to, you can also run a database for EnceBot, because as of 3/17/23, 
 
 # What is the reason for having the bot be open-source?
 I want you to learn from this bot if your into learning how the bots work! And I want you to see how you could work on your own bot!
+
