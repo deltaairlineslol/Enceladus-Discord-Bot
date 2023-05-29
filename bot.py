@@ -7,6 +7,7 @@ import time
 import datetime
 import pymongo
 from bson.objectid import ObjectId
+import base64
 
 #Variables needed for commmands/statuses
 HelloVariable = [
@@ -90,11 +91,11 @@ total_seconds = 0
 intents = discord.Intents.all()
 intents.messages = True
 bot = commands.Bot(command_prefix='e!', intents=intents)
-myclient = pymongo.MongoClient("[Grab your login from your mongoDB Cluster or server and put it here!]")
+myclient = pymongo.MongoClient("mongodb+srv://EnceBot_Python_Bot:LOEHwcCLCPX4ZC3d@deltacluster.vwr2lgp.mongodb.net/test")
 mydb= myclient["EnceBot"]
 dblist = myclient.list_database_names()
 mycol= mydb["Essentials"]
-document_result =  mycol.find_one({"PythonID": "[Whatever ID you set here!]"})
+document_result =  mycol.find_one({"PythonID": "64029791a745f657270d664e"})
 MadnessLevel = document_result["AngerLevel"]
 
 #Join Embed.        
@@ -327,6 +328,7 @@ async def updatelog(ctx):
 **EnceBot Update V1.0.5**
 *The "I forced feedback from community!" Update.*
 • Added new commands, `/changegame`, `/game`, and `/showgoldenoreo`
+• Removed commands, `/trello`, as it was not needed anymore.
 • NOTE: I haven't been doing this because I have 0 feedback, some more would be appreciated! I Learned MongoDB! EnceBot's anger is now tied up to the database, so no more anger reset after i restart the bot!
 """)
 
@@ -334,16 +336,6 @@ async def updatelog(ctx):
 @bot.slash_command(description = "Say owo to Enceladus")
 async def owo(ctx):
     await ctx.respond(random.choice(owoVar))
-
-@bot.slash_command(description = "Trello for development!")
-async def trello(ctx):
-    embed = discord.Embed(title= "Development Trello",
-    description= """We have a trello you can follow to see development progress! 
-    Just click the text that says 'Development Trello' to go to it!""",
-    color= discord.Colour.light_gray(),
-    url = "https://trello.com/b/lWL8tMZn/encebot-development-progress"
-    )    
-    await ctx.respond(embed = embed)
 
 @bot.slash_command(description = "Throw away an Ence Plush")
 async def binplush(ctx):
@@ -381,6 +373,7 @@ async def changegame(ctx):
 @bot.slash_command(description = "Show Ence a Golden Oreo")
 async def showgoldenoreo(ctx):
     MadnessLevel = MadnessLevel + 1
+    
     await ctx.respond(random.choice(goldenOreoVar))
 
 
@@ -398,4 +391,4 @@ async def syncmadnesslevel(torf):
 
 
 
-bot.run('[Your Token Goes here!]')
+bot.run('[Your Bot Token Here]')
