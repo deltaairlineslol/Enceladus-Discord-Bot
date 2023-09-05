@@ -143,24 +143,18 @@ async def hello(ctx):
     MadnessLevel = MadnessLevel - 1
     await syncmadnesslevel(False)
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(HelloVariable))
+    await ctx.response.send_message(random.choice(HelloVariable))
     
 
 #Random Command S3P Requested.
 @bot.tree.command(description="Some random command S3P requested.")
 async def garkalmabdildbajbloug(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond("what..?")
+    await ctx.response.send_message("what..?")
 
 #Ping Test command
 @bot.tree.command(description="Test command, just tells you if the bot is working or not")
 async def ping(ctx):
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.respond('Pong')
+        await ctx.response.send_message('Pong')
 
 #A class setup for discord's dropdown UI
 class Select(discord.ui.Select):
@@ -226,7 +220,7 @@ async def stories(ctx):
     MadnessLevel = MadnessLevel - 1
     await syncmadnesslevel(False)
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
-    await ctx.respond("Here's some stories!",view=SelectView())
+    await ctx.response.send_message("Here's some stories!",view=SelectView())
 
 
 # Feed Oreo command.
@@ -236,22 +230,16 @@ async def feedoreo(ctx):
     MadnessLevel = MadnessLevel - 1
     await syncmadnesslevel(False)
     print("Ence's Madness Level is: " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(FeedOreoVariable))
+    await ctx.response.send_message(random.choice(FeedOreoVariable))
 
 @bot.tree.command(description="Fun facts about the bot!")
 async def funfact(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(FunFactVariable))
+    await ctx.response.send_message(random.choice(FunFactVariable))
 
 @bot.tree.command(description="Throw away an Oreo.")
 async def throwawayoreo(ctx):
     global MadnessLevel
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(TrashedOreoVariable))
+    await ctx.response.send_message(random.choice(TrashedOreoVariable))
     MadnessLevel = MadnessLevel + 1
     await syncmadnesslevel(True)
 
@@ -261,9 +249,7 @@ async def toothpasteoreo(ctx):
     MadnessLevel = MadnessLevel + 1
     await syncmadnesslevel(True)
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(ToothpasteVariable))
+    await ctx.response.send_message(random.choice(ToothpasteVariable))
 
 
 @bot.tree.command(description="Yell bad at him.")
@@ -272,12 +258,10 @@ async def bad(ctx):
     MadnessLevel = MadnessLevel + 1
     await syncmadnesslevel(True)
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
     if MadnessLevel < 10:
-        await ctx.respond("SYSTEM: You have added 1 more madness level to Enceladus. Either Feed him an oreo, ask a story, or just say hi to lower his level!")
+        await ctx.response.send_message("SYSTEM: You have added 1 more madness level to Enceladus. Either Feed him an oreo, ask a story, or just say hi to lower his level!")
     elif MadnessLevel >= 10:
-        await ctx.respond("your gonna regret that...")
+        await ctx.response.send_message("your gonna regret that...")
 
 
 @bot.tree.command(description="Calm him.")
@@ -286,9 +270,7 @@ async def calm(ctx):
     MadnessLevel = MadnessLevel - 1
     await syncmadnesslevel(False)
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond("Thanks.")
+    await ctx.response.send_message("Thanks.")
 
 @bot.tree.command(description="Give the boy tea!")
 async def givetea(ctx):
@@ -296,9 +278,7 @@ async def givetea(ctx):
     MadnessLevel = MadnessLevel - 1
     await syncmadnesslevel(False)
     print("Ence's Madness Level is: " + str(MadnessLevel) + " Right now!")
-    async with ctx.typing():
-        await asyncio.sleep(2)
-    await ctx.respond(random.choice(TeaVariable))
+    await ctx.response.send_message(random.choice(TeaVariable))
 
 
 @bot.tree.command(description="Check his mood, sometimes the people in the public server can make him angry...")
@@ -306,28 +286,28 @@ async def checkmood(ctx):
     global MadnessLevel
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
     if MadnessLevel < 0:
-        await ctx.respond(f"He is calm, and happy! Madness level = {MadnessLevel}")
+        await ctx.response.send_message(f"He is calm, and happy! Madness level = {MadnessLevel}")
     elif MadnessLevel == 0:
-        await ctx.respond(f"He is neutral. Madness level = {MadnessLevel}")
+        await ctx.response.send_message(f"He is neutral. Madness level = {MadnessLevel}")
     elif MadnessLevel >= 10:
-        await ctx.respond(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")
+        await ctx.response.send_message(f"He is Mad, Calm him before interacting with him. Madness Level = {MadnessLevel}")
     elif MadnessLevel >= 5:
-        await ctx.respond(f"He is annoyed. Getting really close to getting mad at anyone. Madness level = {MadnessLevel}")
+        await ctx.response.send_message(f"He is annoyed. Getting really close to getting mad at anyone. Madness level = {MadnessLevel}")
     elif MadnessLevel >= 2:
-        await ctx.respond(f"He isn't really that happy at the moment.")
+        await ctx.response.send_message(f"He isn't really that happy at the moment.")
     
-
-@bot.tree.command(description = "Send Feedback to the dev!")
-async def feedback(ctx, feedback):
-    await ctx.respond("Feedback sent! I hope to read your idea and add it!")
-    print("Someone sent feedback! The feedback is: " + feedback)
-    f = open("feedbacklog.txt", "a")
-    f.write(feedback + "\n")
-    f.close()
+### FEEDBACK IS BROKEN, WORKING ON FIX RIGHT NOW.
+#@bot.tree.command(description = "Send Feedback to the dev!")
+#async def feedback(ctx, feedback):
+#    await ctx.response.send_message("Feedback sent! I hope to read your idea and add it!")
+#    print("Someone sent feedback! The feedback is: " + feedback)
+#    f = open("feedbacklog.txt", "a")
+#    f.write(feedback + "\n")
+#    f.close()
 
 @bot.tree.command(description = "View the Latest Update!")
 async def updatelog(ctx):
-    await ctx.respond("""Latest Update log:
+    await ctx.response.send_message("""Latest Update log:
     
 **EnceBot Update V1.0.5**
 *The "I forced feedback from community!" Update.*
@@ -339,46 +319,50 @@ async def updatelog(ctx):
 
 @bot.tree.command(description = "Say owo to Enceladus")
 async def owo(ctx):
-    await ctx.respond(random.choice(owoVar))
+    await ctx.response.send_message(random.choice(owoVar))
+
 
 @bot.tree.command(description = "Throw away an Ence Plush")
 async def binplush(ctx):
-    await ctx.respond(random.choice(BinEncePlushVar))
+    global MadnessLevel
+    await ctx.response.send_message(random.choice(BinEncePlushVar))
     MadnessLevel = MadnessLevel + 1
+    print("Ence's Madness Level is: " + str(MadnessLevel) + " Right now!")
     await syncmadnesslevel(True)
 
 @bot.tree.command(description = "Says the game he's playing." )
 async def game(ctx):
-    await ctx.respond(f"Ence is currently Playing {CurrentlyPlaying}, I bet he's having fun right now!", ephemeral=True)
+    await ctx.response.send_message(f"Ence is currently Playing {CurrentlyPlaying}, I bet he's having fun right now!", ephemeral=True)
 
-@bot.tree.command(description="Changes the game ence plays. (cooldown of 10 minutes)")
-async def changegame(ctx):
+#@bot.tree.command(description="Changes the game ence plays. (cooldown of 10 minutes)")
+#async def changegame(ctx):
     # Countdown Timer.
     
-    def countdown(m):
-        total_seconds = m*60
-        print(total_seconds)
-        while total_seconds > 0:
-            timer = datetime.timedelta(seconds = total_seconds)
-            time.sleep(1)
-            total_seconds-= 1
+#    def countdown(m):
+#        total_seconds = m*60
+#        print(total_seconds)
+#        while total_seconds > 0:
+#            timer = datetime.timedelta(seconds = total_seconds)
+#            time.sleep(1)
+#            total_seconds-= 1
     
-    if total_seconds <= 0:
+#    if total_seconds <= 0:
         
-        await ctx.respond("Changing game... Please wait.", ephemeral = True)
-        CurrentlyPlaying = random.choice(StatusVariable)
-        await bot.change_presence(activity=discord.Game(CurrentlyPlaying))
-        await ctx.respond(f"Enceladus is now playing {CurrentlyPlaying}, Hope he enjoys it!")
-        await ctx.respond(f"NOTE: This is a temporary issue i have no clue how to solve, but if you can't run `/changegame`, then its on a cooldown.", ephemeral = True)
-        countdown(m=10)
-    elif total_seconds > 0:
-        await ctx.respond(f"The cooldown is still active. there are still {total_seconds} seconds left!")
+#        await ctx.response.send_message("Changing game... Please wait.", ephemeral = True)
+#        CurrentlyPlaying = random.choice(StatusVariable)
+#        await bot.change_presence(activity=discord.Game(CurrentlyPlaying))
+#        await ctx.response.send_message(f"Enceladus is now playing {CurrentlyPlaying}, Hope he enjoys it!")
+#        await ctx.response.send_message(f"NOTE: This is a temporary issue i have no clue how to solve, but if you can't run `/changegame`, then its on a cooldown.", ephemeral = True)
+#        countdown(m=10)
+#    elif total_seconds > 0:
+#        await ctx.response.send_message(f"The cooldown is still active. there are still {total_seconds} seconds left!")
 
 @bot.tree.command(description = "Show Ence a Golden Oreo")
 async def showgoldenoreo(ctx):
+    global MadnessLevel
     MadnessLevel = MadnessLevel + 1
     
-    await ctx.respond(random.choice(goldenOreoVar))
+    await ctx.response.send_message(random.choice(goldenOreoVar))
 
 
 async def syncmadnesslevel(torf):
