@@ -2,6 +2,7 @@ import discord
 import random
 import asyncio
 from discord.utils import find
+from discord import app_commands
 from discord.ext import commands
 import time
 import datetime
@@ -97,6 +98,8 @@ dblist = myclient.list_database_names()
 mycol= mydb["Essentials"]
 document_result =  mycol.find_one({"PythonID": "64029791a745f657270d664e"})
 MadnessLevel = document_result["AngerLevel"]
+tree = app_commands.CommandTree(bot)
+
 
 #Join Embed.        
 @bot.event
@@ -104,7 +107,7 @@ async def on_guild_join(guild):
     channel = discord.utils.get(guild.channels, name="general")
     embedHi = discord.Embed(
             title = "Hello Friends! I can't wait to meet all of you!",
-            description = "I use slash commands, just look at the commands to see what I do! Looking forward to meeting everyone!",
+            description = "I use slash commands, just look at the slash commands to see what I do! Looking forward to meeting everyone!",
             colour = discord.Colour.light_grey())
     embedHi.set_thumbnail(
             url = "https://media.discordapp.net/stickers/1007808445606527067.webp?size=320"
@@ -119,7 +122,8 @@ async def on_ready():
     global CurrentlyPlaying
     CurrentlyPlaying = random.choice(StatusVariable)
     await bot.change_presence(activity=discord.Game(CurrentlyPlaying))
-    bot.sync_commands
+     
+
     if "EnceBot" in dblist:
         mydb = myclient["EnceBot"]
         mycol= mydb["Essentials"]
@@ -133,7 +137,7 @@ async def on_ready():
     
 
 #Hello Command    
-@bot.slash_command(description="Say hi to the boy!")
+@bot.tree.command(description="Say hi to the boy!")
 async def hello(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -145,14 +149,14 @@ async def hello(ctx):
     
 
 #Random Command S3P Requested.
-@bot.slash_command(description="Some random command S3P requested.")
+@bot.tree.command(description="Some random command S3P requested.")
 async def garkalmabdildbajbloug(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     await ctx.respond("what..?")
 
 #Ping Test command
-@bot.slash_command(description="Test command, just tells you if the bot is working or not")
+@bot.tree.command(description="Test command, just tells you if the bot is working or not")
 async def ping(ctx):
         async with ctx.typing():
             await asyncio.sleep(2)
@@ -216,7 +220,7 @@ class SelectView(discord.ui.View):
         self.add_item(Select())
 
 #The actual command itself. Stories command.
-@bot.slash_command(description="Stories!")
+@bot.tree.command(description="Stories!")
 async def stories(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -226,7 +230,7 @@ async def stories(ctx):
 
 
 # Feed Oreo command.
-@bot.slash_command(description="Feed the boy an oreo!")
+@bot.tree.command(description="Feed the boy an oreo!")
 async def feedoreo(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -236,13 +240,13 @@ async def feedoreo(ctx):
         await asyncio.sleep(2)
     await ctx.respond(random.choice(FeedOreoVariable))
 
-@bot.slash_command(description="Fun facts about the bot!")
+@bot.tree.command(description="Fun facts about the bot!")
 async def funfact(ctx):
     async with ctx.typing():
         await asyncio.sleep(2)
     await ctx.respond(random.choice(FunFactVariable))
 
-@bot.slash_command(description="Throw away an Oreo.")
+@bot.tree.command(description="Throw away an Oreo.")
 async def throwawayoreo(ctx):
     global MadnessLevel
     async with ctx.typing():
@@ -251,7 +255,7 @@ async def throwawayoreo(ctx):
     MadnessLevel = MadnessLevel + 1
     await syncmadnesslevel(True)
 
-@bot.slash_command(description="Feed him a toothpaste oreo.")
+@bot.tree.command(description="Feed him a toothpaste oreo.")
 async def toothpasteoreo(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel + 1
@@ -262,7 +266,7 @@ async def toothpasteoreo(ctx):
     await ctx.respond(random.choice(ToothpasteVariable))
 
 
-@bot.slash_command(description="Yell bad at him.")
+@bot.tree.command(description="Yell bad at him.")
 async def bad(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel + 1
@@ -276,7 +280,7 @@ async def bad(ctx):
         await ctx.respond("your gonna regret that...")
 
 
-@bot.slash_command(description="Calm him.")
+@bot.tree.command(description="Calm him.")
 async def calm(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -286,7 +290,7 @@ async def calm(ctx):
         await asyncio.sleep(2)
     await ctx.respond("Thanks.")
 
-@bot.slash_command(description="Give the boy tea!")
+@bot.tree.command(description="Give the boy tea!")
 async def givetea(ctx):
     global MadnessLevel
     MadnessLevel = MadnessLevel - 1
@@ -297,7 +301,7 @@ async def givetea(ctx):
     await ctx.respond(random.choice(TeaVariable))
 
 
-@bot.slash_command(description="Check his mood, sometimes the people in the public server can make him angry...")
+@bot.tree.command(description="Check his mood, sometimes the people in the public server can make him angry...")
 async def checkmood(ctx):
     global MadnessLevel
     print("Ence's Madness Level is " + str(MadnessLevel) + " Right now!")
@@ -313,7 +317,7 @@ async def checkmood(ctx):
         await ctx.respond(f"He isn't really that happy at the moment.")
     
 
-@bot.slash_command(description = "Send Feedback to the dev!")
+@bot.tree.command(description = "Send Feedback to the dev!")
 async def feedback(ctx, feedback):
     await ctx.respond("Feedback sent! I hope to read your idea and add it!")
     print("Someone sent feedback! The feedback is: " + feedback)
@@ -321,33 +325,33 @@ async def feedback(ctx, feedback):
     f.write(feedback + "\n")
     f.close()
 
-@bot.slash_command(description = "View the Latest Update!")
+@bot.tree.command(description = "View the Latest Update!")
 async def updatelog(ctx):
     await ctx.respond("""Latest Update log:
     
 **EnceBot Update V1.0.5**
 *The "I forced feedback from community!" Update.*
-• Added new commands, `/changegame`, `/game`, and `/showgoldenoreo`
-• Removed commands, `/trello`, as it was not needed anymore.
+• Added new app_commands.commands, `/changegame`, `/game`, and `/showgoldenoreo`
+• Removed app_commands.commands, `/trello`, as it was not needed anymore.
 • NOTE: I haven't been doing this because I have 0 feedback, some more would be appreciated! I Learned MongoDB! EnceBot's anger is now tied up to the database, so no more anger reset after i restart the bot!
 """)
 
 
-@bot.slash_command(description = "Say owo to Enceladus")
+@bot.tree.command(description = "Say owo to Enceladus")
 async def owo(ctx):
     await ctx.respond(random.choice(owoVar))
 
-@bot.slash_command(description = "Throw away an Ence Plush")
+@bot.tree.command(description = "Throw away an Ence Plush")
 async def binplush(ctx):
     await ctx.respond(random.choice(BinEncePlushVar))
     MadnessLevel = MadnessLevel + 1
     await syncmadnesslevel(True)
 
-@bot.slash_command(description = "Says the game he's playing." )
+@bot.tree.command(description = "Says the game he's playing." )
 async def game(ctx):
     await ctx.respond(f"Ence is currently Playing {CurrentlyPlaying}, I bet he's having fun right now!", ephemeral=True)
 
-@bot.slash_command(description="Changes the game ence plays. (cooldown of 10 minutes)")
+@bot.tree.command(description="Changes the game ence plays. (cooldown of 10 minutes)")
 async def changegame(ctx):
     # Countdown Timer.
     
@@ -370,7 +374,7 @@ async def changegame(ctx):
     elif total_seconds > 0:
         await ctx.respond(f"The cooldown is still active. there are still {total_seconds} seconds left!")
 
-@bot.slash_command(description = "Show Ence a Golden Oreo")
+@bot.tree.command(description = "Show Ence a Golden Oreo")
 async def showgoldenoreo(ctx):
     MadnessLevel = MadnessLevel + 1
     
