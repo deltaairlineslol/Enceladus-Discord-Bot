@@ -317,13 +317,15 @@ async def checkmood(ctx):
         await ctx.respond(f"He isn't really that happy at the moment.")
     
 
-@bot.tree.command(description = "Send Feedback to the dev!")
-async def feedback(ctx, feedback):
-    await ctx.respond("Feedback sent! I hope to read your idea and add it!")
-    print("Someone sent feedback! The feedback is: " + feedback)
-    f = open("feedbacklog.txt", "a")
-    f.write(feedback + "\n")
-    f.close()
+### FEEDBACK IS BROKEN, WORKING ON FIX RIGHT NOW.
+#@bot.tree.command(description = "Send Feedback to the dev!")
+#async def feedback(ctx, feedback):
+#    await ctx.respond("Feedback sent! I hope to read your idea and add it!")
+#    print("Someone sent feedback! The feedback is: " + feedback)
+#    f = open("feedbacklog.txt", "a")
+#    f.write(feedback + "\n")
+#    f.close()
+
 
 @bot.tree.command(description = "View the Latest Update!")
 async def updatelog(ctx):
