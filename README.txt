@@ -18,3 +18,4 @@ You can Setup a Database with EnceBot now!
 2. Sign up with an Account
 3. Setup a MongoDB Atlas Cluster (Free plan is fine, that is what im using)
 4. Check out the Config.txt for db settings.
+5. (due to MongoDB config.txt not existing, you will use the following) DB: EnceBot, Collection: Essentials, Record needs an object called "PythonID" which is a string record that has "64029791a745f657270d664e" as it's value, and AngerLevel, which is an integer object.
