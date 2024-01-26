@@ -92,7 +92,7 @@ total_seconds = 0
 intents = discord.Intents.all()
 intents.messages = True
 bot = commands.Bot(command_prefix='e!', intents=intents)
-myclient = pymongo.MongoClient("mongodb+srv://EnceBot_Python_Bot:LOEHwcCLCPX4ZC3d@deltacluster.vwr2lgp.mongodb.net/test")
+myclient = pymongo.MongoClient("[REDACTED]")
 mydb= myclient["EnceBot"]
 dblist = myclient.list_database_names()
 mycol= mydb["Essentials"]
