@@ -87,6 +87,15 @@ goldenOreoVar = [
     "why is it yellow??",
 ]
 
+
+### TEMP FIX DUE TO DNS ISSUES WITH 8.8.4.4 AND DNSPYTHON
+
+import dns.resolver
+dns.resolver.default_resolver = dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers = ['8.8.8.8', '2001:4860:4860::8888',
+                                             '8.8.4.4', '2001:4860:4860::8844' ]
+
+
 total_seconds = 0
 #Intents, needed to read messages.
 intents = discord.Intents.all()
